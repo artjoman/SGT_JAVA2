@@ -19,8 +19,6 @@ public class OrderProduct {
     private Integer quantity;
 
     // default constructor
-
-
     public OrderProduct() {
     }
 

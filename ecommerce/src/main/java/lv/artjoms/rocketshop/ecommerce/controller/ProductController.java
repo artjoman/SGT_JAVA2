@@ -14,7 +14,7 @@ public class ProductController {
     @Autowired
     ProductServiceImpl productService;
 
-    @GetMapping(value = { "", "/" })
+    @GetMapping(value = { "", "/", "/some-method" })
     public Iterable<Product> getProducts() {
         return productService.getAllProducts();
     }
