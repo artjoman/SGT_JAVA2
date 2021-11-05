@@ -3,23 +3,24 @@ import { ProductOrder } from './models/ProductOrder';
 import { ProductOrders } from './models/ProductOrders';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Product } from './models/Product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EcommerceServiceService {
 
-    private productsUrl = "http://localhost:8080/api/products";
+    private productsUrl = "/api/products";
     private ordersUrl = "/api/orders";
 
-    private productOrder: ProductOrder;
-    private orders: ProductOrders = new ProductOrders();
+    private productOrder!: ProductOrder;
+    private orders!: ProductOrders;
 
     private productOrderSubject = new Subject();
     private ordersSubject = new Subject();
     private totalSubject = new Subject();
 
-    private total: number;
+    private total!: number;
 
     ProductOrderChanged = this.productOrderSubject.asObservable();
     OrdersChanged = this.ordersSubject.asObservable();
@@ -34,6 +35,33 @@ export class EcommerceServiceService {
 
     saveOrder(order: ProductOrders) {
         return this.http.post(this.ordersUrl, order);
+    }
+
+    set SelectedProductOrder(value: ProductOrder) {
+        this.productOrder = value;
+        this.productOrderSubject.next();
+    }
+
+    get SelectedProductOrder() {
+        return this.productOrder;
+    }
+
+    set ProductOrders(value: ProductOrders) {
+        this.orders = value;
+        this.ordersSubject.next();
+    }
+
+    get ProductOrders() {
+        return this.orders;
+    }
+
+    get Total() {
+        return this.total;
+    }
+
+    set Total(value: number) {
+        this.total = value;
+        this.totalSubject.next();
     }
 
 }
