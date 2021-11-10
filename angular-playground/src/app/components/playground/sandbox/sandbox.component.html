@@ -1,0 +1,8 @@
+<p>sandbox works!</p>
+<p>Children playing: </p>
+<div *ngFor="let child of children" >
+    {{child}}
+</div>
+<label>Join the sandbox</label>
+<input [(ngModel)]="newString" >
+<button (click)="addChild()">JOIN</button>
